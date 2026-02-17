@@ -1,0 +1,30 @@
+version: '3.10'
+
+networks:
+  backend:
+
+volumes:
+  pgdata:
+  static:
+  media:
+
+services:
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    container_name: web
+    env_file:
+      - .env
+#    expose:
+#      - 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/src/app
+
+    networks:
+      backend:
+        aliases:
+          - web
