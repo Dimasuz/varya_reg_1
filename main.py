@@ -6,8 +6,8 @@ from request_1 import request_all
 from send_mail import send_from_yandex, to_addr
 from send_tel import send_telegram
 
-period_sec = 30 # sec период повторения запросов
-send_time_min = 60 # min как часто отправлять сообщение о работе
+period_sec = 10 # sec период повторения запросов
+send_time_min = 5 # min как часто отправлять сообщение о работе
 work_time_days = 30 # day сколько всего работает программа
 
 logging.basicConfig(

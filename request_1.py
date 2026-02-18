@@ -1,4 +1,6 @@
+import os
 import logging
+from dotenv import find_dotenv, load_dotenv
 
 from request_site import request_url
 from list_sites import list_sites
@@ -16,6 +18,13 @@ logging.StreamHandler()
 )
 
 logger = logging.getLogger(__name__)
+ENV_FILE = find_dotenv()
+if ENV_FILE:
+    load_dotenv(ENV_FILE)
+
+chat_id_g = os.environ.get("CHAT_ID_G", "")
+chat_id_v = os.environ.get("CHAT_ID_V", "")
+chat_id_d = os.environ.get("CHAT_ID_D", "")
 
 def request_list(sites):
 
@@ -32,6 +41,8 @@ def request_list(sites):
             if ind_1 == -1:
                 alert = f"Site {site[0]} has changed! \n {site[1]}"
                 logging.info(alert)
+                send_telegram(alert, chat_id_v)
+                send_telegram(alert, chat_id_d)
                 send_from_yandex(to_addr, alert, alert)
                 send_telegram(alert)
             else:
@@ -50,6 +61,8 @@ def request_list(sites):
                 else:
                     alert = f"Site {site[0]} has changed! \n {site[1]}"
                     logging.info(alert)
+                    send_telegram(alert, chat_id_v)
+                    send_telegram(alert, chat_id_d)
                     send_from_yandex(to_addr, alert, alert)
                     send_telegram(alert)
         else:
