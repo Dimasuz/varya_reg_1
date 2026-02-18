@@ -8,8 +8,8 @@ ENV_FILE = find_dotenv()
 if ENV_FILE:
     load_dotenv(ENV_FILE)
 
-# to_addr = ["5845889@mail.ru", "dluzanov@mail.com"]
-to_addr = ["5845889@mail.ru", "varyaluz@gmail.com"]
+to_addr = ["5845889@mail.ru", ]
+# to_addr = ["5845889@mail.ru", "varyaluz@gmail.com"]
 
 def send_from_yandex(to_addr, subj, text):
 
