@@ -3,7 +3,7 @@ import requests
 from list_sites import list_sites
 
 def request_site():
-    url = "https://mhatschool.ru/abiturient/133"
+    url = "https://gitis.net/postupayushim/bachelor/proslushivania/#artist"
     st_accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
     # имитируем подключение через браузер Mozilla
     st_useragent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"

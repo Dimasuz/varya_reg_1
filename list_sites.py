@@ -12,4 +12,8 @@ list_sites = [
      "https://mhatschool.ru/abiturient/133",
      'Актерский факультет</div>',
      "2026 года.",],
+    ["gitis",
+     "https://gitis.net/postupayushim/bachelor/proslushivania/#muzart",
+     "Артист драматического театра и кино",
+     "Артист музыкального театра",],
 ]
