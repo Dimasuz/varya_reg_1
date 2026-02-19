@@ -1,28 +1,28 @@
-from datetime import datetime, timedelta
-import time
 import logging
+import time
+from datetime import datetime, timedelta
+
 from request_1 import request_all
+
 # from request_2 import request_mhatschool
 from send_mail import send_from_yandex, to_addr
 from send_tel import send_telegram
 
-period_sec = 10 # sec период повторения запросов
-send_time_min = 5 # min как часто отправлять сообщение о работе
-work_time_days = 30 # day сколько всего работает программа
+period_sec = 10  # sec период повторения запросов
+send_time_min = 5  # min как часто отправлять сообщение о работе
+work_time_days = 30  # day сколько всего работает программа
 
 logging.basicConfig(
-level=logging.INFO,
-format='%(asctime)s [%(levelname)s] %(message)s',
-handlers=[
-logging.FileHandler("debug.log"),
-logging.StreamHandler()
-]
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.FileHandler("debug.log"), logging.StreamHandler()],
 )
 
 logger = logging.getLogger(__name__)
 
+
 def request_sites(per=period_sec, send_time=send_time_min, work_time=work_time_days):
-    with open('de]bug.log', 'w'):
+    with open("de]bug.log", "w"):
         pass
     start = datetime.now()
     time_work = start + timedelta(minutes=send_time)
@@ -49,12 +49,12 @@ def request_sites(per=period_sec, send_time=send_time_min, work_time=work_time_d
         if time_now > time_work:
             alert = f"Working! {time_now}"
             logging.info(alert)
-            with open('debug.log') as f:
+            with open("debug.log") as f:
                 log = f.read()
                 send_from_yandex(to_addr, alert, log)
                 send_telegram(alert)
             time_work += timedelta(minutes=send_time)
-            with open('debug.log', 'w') as f:
+            with open("debug.log", "w") as f:
                 f.write(f"{alert}\n")
 
 

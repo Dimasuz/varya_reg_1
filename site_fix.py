@@ -1,14 +1,10 @@
-import requests
+from request_site import request_url
 
-from list_sites import list_sites
+url = "https://gitis.net/postupayushim/auditions/"
 
-def request_site():
-    url = "https://gitis.net/postupayushim/bachelor/proslushivania/#artist"
-    st_accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
-    # имитируем подключение через браузер Mozilla
-    st_useragent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
-    headers = {"Accept": st_accept, "User-Agent": st_useragent}
-    req = requests.get(url, headers=headers, verify=False)
+
+def request_site(url=url):
+    req = request_url(url)
 
     if req.status_code == 200:
         req_txt = req.text

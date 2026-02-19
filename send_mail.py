@@ -1,15 +1,19 @@
 import os
-from dotenv import find_dotenv, load_dotenv
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+
+from dotenv import find_dotenv, load_dotenv
 
 ENV_FILE = find_dotenv()
 if ENV_FILE:
     load_dotenv(ENV_FILE)
 
-to_addr = ["5845889@mail.ru", ]
+to_addr = [
+    "5845889@mail.ru",
+]
 # to_addr = ["5845889@mail.ru", "varyaluz@gmail.com"]
+
 
 def send_from_yandex(to_addr, subj, text):
 
@@ -17,14 +21,14 @@ def send_from_yandex(to_addr, subj, text):
     mypass = os.environ.get("EMAIL_PASS", "")
 
     msg = MIMEMultipart()
-    msg['From'] = from_addr
+    msg["From"] = from_addr
     # msg['To'] = to_addr
-    msg['Subject'] = subj
+    msg["Subject"] = subj
 
     body = text
-    msg.attach(MIMEText(body, 'plain'))
+    msg.attach(MIMEText(body, "plain"))
 
-    server = smtplib.SMTP_SSL('smtp.yandex.ru', 465)
+    server = smtplib.SMTP_SSL("smtp.yandex.ru", 465)
     server.login(from_addr, mypass)
     text_1 = msg.as_string()
     for addr in to_addr:
@@ -35,6 +39,7 @@ def send_from_yandex(to_addr, subj, text):
     server.quit()
 
     return None
+
 
 # if __name__ == "__main__":
 #     alert = "test"

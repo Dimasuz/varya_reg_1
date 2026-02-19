@@ -1,20 +1,17 @@
-import os
 import logging
+import os
+
 from dotenv import find_dotenv, load_dotenv
 
-from request_site import request_url
 from list_sites import list_sites
+from request_site import request_url
 from send_mail import send_from_yandex, to_addr
 from send_tel import send_telegram
 
-
 logging.basicConfig(
-level=logging.INFO,
-format='%(asctime)s [%(levelname)s] %(message)s',
-handlers=[
-logging.FileHandler("debug.log"),
-logging.StreamHandler()
-]
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.FileHandler("debug.log"), logging.StreamHandler()],
 )
 
 logger = logging.getLogger(__name__)
@@ -25,6 +22,7 @@ if ENV_FILE:
 chat_id_g = os.environ.get("CHAT_ID_G", "")
 chat_id_v = os.environ.get("CHAT_ID_V", "")
 chat_id_d = os.environ.get("CHAT_ID_D", "")
+
 
 def request_list(sites):
 
@@ -51,7 +49,9 @@ def request_list(sites):
                 with open(f"{site[0]}_check.txt", "w", encoding="utf-8") as f:
                     f.write(text_find)
                     # f.flush()
-                with open(f"{site[0]}_check.txt", encoding="utf-8") as f_check, open(f"{site[0]}_fix.txt", encoding="utf-8") as f:
+                with open(f"{site[0]}_check.txt", encoding="utf-8") as f_check, open(
+                    f"{site[0]}_fix.txt", encoding="utf-8"
+                ) as f:
                     text_find = f_check.read()
                     site_txt = f.read()
                 # print(text_find)

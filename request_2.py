@@ -1,18 +1,16 @@
 import logging
+
 from request_site import request_url
 from send_mail import send_from_yandex, to_addr
 
-
 logging.basicConfig(
-level=logging.INFO,
-format='%(asctime)s [%(levelname)s] %(message)s',
-handlers=[
-logging.FileHandler("debug.log"),
-logging.StreamHandler()
-]
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.FileHandler("debug.log"), logging.StreamHandler()],
 )
 
 logger = logging.getLogger(__name__)
+
 
 def request_mhatschool():
     url_1 = "https://mhatschool.ru/abiturient/97"
@@ -46,6 +44,7 @@ def request_mhatschool():
     print(alert)
 
     return None
+
 
 if __name__ == "__main__":
     request_mhatschool()

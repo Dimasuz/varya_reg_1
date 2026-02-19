@@ -1,8 +1,10 @@
 import logging
+
 import requests
 import urllib3
 
 urllib3.disable_warnings()
+
 
 def request_url(url):
     # st_accept = {"text/html", "application/json", "*/*"}
@@ -11,7 +13,7 @@ def request_url(url):
     st_useragent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
     headers = {"Accept": st_accept, "User-Agent": st_useragent}
     try:
-        req = requests.get(url, headers=headers, timeout=(10,30), verify=False)
+        req = requests.get(url, headers=headers, timeout=(10, 30), verify=False)
     except requests.exceptions.Timeout:
         alert = f"Timed out on {url}"
         logging.info(alert)
