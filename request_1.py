@@ -15,6 +15,7 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
+
 ENV_FILE = find_dotenv()
 if ENV_FILE:
     load_dotenv(ENV_FILE)
@@ -42,7 +43,7 @@ def request_list(sites):
                 send_telegram(alert, chat_id_v)
                 send_telegram(alert, chat_id_d)
                 send_from_yandex(to_addr, alert, alert)
-                send_telegram(alert)
+                send_telegram(alert, chat_id_g)
             else:
                 ind_2 = req_txt.find(site[3], ind_1)
                 text_find = req_txt[ind_1:ind_2]
@@ -64,12 +65,12 @@ def request_list(sites):
                     send_telegram(alert, chat_id_v)
                     send_telegram(alert, chat_id_d)
                     send_from_yandex(to_addr, alert, alert)
-                    send_telegram(alert)
+                    send_telegram(alert, chat_id_g)
         else:
             alert = f"False request the site - {site[0]}"
             logging.info(alert)
             send_from_yandex(to_addr[0:1], alert, alert)
-            send_telegram(alert)
+            send_telegram(alert, chat_id_g)
 
         print(alert)
 

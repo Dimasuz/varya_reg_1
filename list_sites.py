@@ -1,6 +1,12 @@
 list_sites = [
     [
-        "vgik",
+        "vgik_1",
+        "https://vgik.info/abiturient/higher/spetsialitet/aktyerskiy-fakultet/",
+        '<div class="iner-page-title">Актёрский факультет</div>',
+        "Расписание предварительных прослушиваний",
+    ],
+    [
+        "vgik_2",
         "https://vgik.info/abiturient/higher/spetsialitet/aktyerskiy-fakultet/",
         "Расписание предварительных прослушиваний",
         "</tbody>",

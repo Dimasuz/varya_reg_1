@@ -1,6 +1,6 @@
 from request_site import request_url
 
-url = "https://gitis.net/postupayushim/auditions/"
+url = "https://vgik.info/abiturient/higher/spetsialitet/aktyerskiy-fakultet/"
 
 
 def request_site(url=url):

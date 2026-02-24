@@ -9,13 +9,9 @@ if ENV_FILE:
     load_dotenv(ENV_FILE)
 
 bot_token = os.environ.get("BOT_TOKEN", "")
-chat_id_g = os.environ.get("CHAT_ID_G", "")
-chat_id_v = os.environ.get("CHAT_ID_V", "")
-chat_id_d = os.environ.get("CHAT_ID_D", "")
-message_text = "Привет!"
 
 
-def send_telegram(message_text, chat_id=chat_id_g):
+def send_telegram(message_text, chat_id):
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
     params = {
         "chat_id": chat_id,
@@ -45,5 +41,4 @@ def test():
 
 
 if __name__ == "__main__":
-    send_telegram(message_text)
     test()
