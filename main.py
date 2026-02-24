@@ -57,10 +57,10 @@ def request_sites(per=period_sec, send_time=send_time_min, work_time=work_time_d
             alert = f"Stop the program at {time_now}"
             logging.info(alert)
             send_from_yandex(to_addr, alert, alert)
-            send_telegram(alert)
+            send_telegram(alert, chat_id_g)
             break
 
-        if (start + timedelta(minutes=1)) < time_now and check_ready:
+        if (start + timedelta(hours=3)) < time_now and check_ready:
             check_ready = False
             alert = f"Check the websites by yourself \n{list_sites[0][1]}\n{list_sites[2][1]}\n{list_sites[3][1]}\n{list_sites[4][1]}"
             logging.info(alert)
@@ -73,7 +73,7 @@ def request_sites(per=period_sec, send_time=send_time_min, work_time=work_time_d
             with open("debug.log") as f:
                 log = f.read()
                 send_from_yandex(to_addr, alert, log)
-                send_telegram(alert)
+                send_telegram(alert, chat_id_g)
             time_work += timedelta(minutes=send_time)
             with open("debug.log", "w") as f:
                 f.write(f"{alert}\n")
