@@ -2,6 +2,7 @@ import logging
 import os
 import time
 from datetime import datetime, timedelta
+from pprint import pprint
 
 from dotenv import find_dotenv, load_dotenv
 
@@ -11,6 +12,7 @@ from request_1 import request_all
 # from request_2 import request_mhatschool
 from send_mail import send_from_yandex, to_addr
 from send_tel import send_telegram
+from sites_fix import request_site
 
 period_sec = 30  # sec период повторения запросов
 send_time_min = 30  # min как часто отправлять сообщение о работе
@@ -33,7 +35,7 @@ chat_id_v = os.environ.get("CHAT_ID_V", "")
 chat_id_d = os.environ.get("CHAT_ID_D", "")
 
 
-def request_sites(per=period_sec, send_time=send_time_min, work_time=work_time_days):
+def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_days):
     with open("de]bug.log", "w"):
         pass
     start = datetime.now()
@@ -44,12 +46,28 @@ def request_sites(per=period_sec, send_time=send_time_min, work_time=work_time_d
     send_telegram(alert, chat_id_g)
 
     check_ready = True
+    changed_time = 1
 
     while True:
         time_now = datetime.now()
         logging.info(f"Request the websites at {time_now}")
         time.sleep(1)
-        request_all()
+        resp = request_all()
+        pprint(resp)
+        for i in range(len(resp)):
+            if "has changed" in resp[i][2]:
+                alert = f"{resp[i][0]} has changed, {changed_time=}."
+                logging.info(alert)
+                if changed_time > 2:
+                    request_site(list_sites[i])
+                    alert = f"{resp[i][0]} has renewed."
+                    logging.info(alert)
+                    changed_time = 1
+                else:
+                    changed_time += 1
+            else:
+                pass
+                # print(f"{resp[i][0]} has no changed.")
         # request_mhatschool()
         time.sleep(per)
 
@@ -70,14 +88,15 @@ def request_sites(per=period_sec, send_time=send_time_min, work_time=work_time_d
         if time_now > time_work:
             alert = f"Working! {time_now}"
             logging.info(alert)
+            log = "Logs was not read!"
             with open("debug.log") as f:
                 log = f.read()
-                send_from_yandex(to_addr, alert, log)
-                send_telegram(alert, chat_id_g)
+            send_from_yandex(to_addr, alert, log)
+            send_telegram(alert, chat_id_g)
             time_work += timedelta(minutes=send_time)
             with open("debug.log", "w") as f:
                 f.write(f"{alert}\n")
 
 
 if __name__ == "__main__":
-    request_sites()
+    check_sites()
