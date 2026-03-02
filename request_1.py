@@ -36,8 +36,8 @@ def request_list(sites):
         if req == None:
             alert = f"Error request the site - {site[0]}"
             logging.info(alert)
-            send_from_yandex(to_addr[0:1], alert, alert)
-            send_telegram(alert, chat_id_d)
+            # send_from_yandex(to_addr[0:1], alert, alert)
+            # send_telegram(alert, chat_id_d)
             resp.append([site[0], site[1], alert])
             continue
 
@@ -78,10 +78,10 @@ def request_list(sites):
                     send_telegram(alert, chat_id_g)
                     resp.append([site[0], site[1], alert])
         else:
-            alert = f"False request the site - {site[0]}"
+            alert = f"False request {req.status_code} at the site - {site[0]}"
             logging.info(alert)
-            send_from_yandex(to_addr[0:1], alert, alert)
-            send_telegram(alert, chat_id_d)
+            # send_from_yandex(to_addr[0:1], alert, alert)
+            # send_telegram(alert, chat_id_d)
             resp.append([site[0], site[1], alert])
 
         print(alert)

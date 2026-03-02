@@ -2,7 +2,7 @@ import logging
 import os
 import time
 from datetime import datetime, timedelta
-from pprint import pprint
+# from pprint import pprint
 
 from dotenv import find_dotenv, load_dotenv
 
@@ -14,7 +14,7 @@ from send_mail import send_from_yandex, to_addr
 from send_tel import send_telegram
 from sites_fix import request_site
 
-period_sec = 30  # sec период повторения запросов
+period_sec = 20  # sec период повторения запросов
 send_time_min = 30  # min как часто отправлять сообщение о работе
 work_time_days = 2  # day сколько всего работает программа
 
@@ -36,13 +36,16 @@ chat_id_d = os.environ.get("CHAT_ID_D", "")
 
 
 def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_days):
-    with open("de]bug.log", "w"):
+    with open("debug_old.log", "a+") as f:
+        f.seek(0)
+        log = f.read()
+    with open("debug.log", "w"), open("debug_old.log", "w"):
         pass
     start = datetime.now()
     time_work = start + timedelta(minutes=send_time)
     alert = f"Start the program at {start}"
     logging.info(alert)
-    send_from_yandex(to_addr, alert, alert)
+    send_from_yandex(to_addr, alert, f"{alert}\nOld logs:\n{log}")
     send_telegram(alert, chat_id_g)
 
     check_ready = True
@@ -53,7 +56,7 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
         logging.info(f"Request the websites at {time_now}")
         time.sleep(1)
         resp = request_all()
-        pprint(resp)
+        # pprint(resp)
         for i in range(len(resp)):
             if "has changed" in resp[i][2]:
                 alert = f"{resp[i][0]} has changed, {changed_time=}."
@@ -94,6 +97,8 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
             send_from_yandex(to_addr, alert, log)
             send_telegram(alert, chat_id_g)
             time_work += timedelta(minutes=send_time)
+            with open("debug_old.log", "a") as f:
+                f.write(f"\n{time_now}\n{log}")
             with open("debug.log", "w") as f:
                 f.write(f"{alert}\n")
 
