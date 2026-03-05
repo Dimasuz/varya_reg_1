@@ -27,18 +27,24 @@ def send_from_yandex(to_addr, subj, text):
 
     body = text
     msg.attach(MIMEText(body, "plain"))
-
-    server = smtplib.SMTP_SSL("smtp.yandex.ru", 465)
-    server.login(from_addr, mypass)
     text_1 = msg.as_string()
+    alert = "Email "
+    try:
+        server = smtplib.SMTP_SSL("smtp.yandex.ru", 465)
+        server.login(from_addr, mypass)
+    except Exception as e:
+        alert = f"error - {e}"
+        return alert
     for addr in to_addr:
         try:
             server.sendmail(from_addr, addr, text_1)
-        except:
-            print(f"Error send massage to {addr}")
+        except Exception as e:
+            alert += f"error to {addr} - {e}/ "
+        else:
+            alert += f"sent to {addr}/ "
     server.quit()
 
-    return None
+    return alert
 
 
 # if __name__ == "__main__":

@@ -2,7 +2,6 @@ import logging
 import os
 import time
 from datetime import datetime, timedelta
-# from pprint import pprint
 
 from dotenv import find_dotenv, load_dotenv
 
@@ -13,6 +12,9 @@ from request_1 import request_all
 from send_mail import send_from_yandex, to_addr
 from send_tel import send_telegram
 from sites_fix import request_site
+
+# from pprint import pprint
+
 
 period_sec = 20  # sec период повторения запросов
 send_time_min = 30  # min как часто отправлять сообщение о работе
@@ -45,7 +47,8 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
     time_work = start + timedelta(minutes=send_time)
     alert = f"Start the program at {start}"
     logging.info(alert)
-    send_from_yandex(to_addr, alert, f"{alert}\nOld logs:\n{log}")
+    alert = send_from_yandex(to_addr, alert, f"{alert}\nOld logs:\n{log}")
+    logging.info(alert)
     send_telegram(alert, chat_id_g)
 
     check_ready = True
@@ -78,7 +81,8 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
         if (start + timedelta(days=work_time)) < time_now:
             alert = f"Stop the program at {time_now}"
             logging.info(alert)
-            send_from_yandex(to_addr, alert, alert)
+            alert = send_from_yandex(to_addr, alert, alert)
+            logging.info(alert)
             send_telegram(alert, chat_id_g)
             break
 
@@ -95,7 +99,8 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
             log = "Logs was not read!"
             with open("debug.log") as f:
                 log = f.read()
-            send_from_yandex(to_addr, alert, log)
+            alert = send_from_yandex(to_addr, alert, log)
+            logging.info(alert)
             send_telegram(alert, chat_id_g)
             time_work += timedelta(minutes=send_time)
             with open("debug_old.log", "a") as f:
