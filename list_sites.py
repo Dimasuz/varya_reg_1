@@ -15,7 +15,7 @@ list_sites = [
         "shepkinskoe",
         "https://shepkinskoe.ru/applicants/specialty/priem-2026/",
         "В 2026-2027 учебном году",
-        "будет размещена в конце февраля 2026 года",
+        "2026 года.",
     ],
     [
         "mhatschool",

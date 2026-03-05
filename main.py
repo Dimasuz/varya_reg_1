@@ -65,6 +65,7 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
                     request_site(list_sites[i])
                     alert = f"{resp[i][0]} has renewed."
                     logging.info(alert)
+                    send_telegram(alert, chat_id_d)
                     changed_time = 1
                 else:
                     changed_time += 1
