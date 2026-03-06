@@ -24,6 +24,7 @@ if ENV_FILE:
 chat_id_g = os.environ.get("CHAT_ID_G", "")
 chat_id_v = os.environ.get("CHAT_ID_V", "")
 chat_id_d = os.environ.get("CHAT_ID_D", "")
+server_name = os.environ.get("SERVER_NAME", "?")
 
 
 def request_list(sites):
@@ -34,7 +35,7 @@ def request_list(sites):
         print(site[0])
         req = request_url(site[1])
         if req == None:
-            alert = f"Error request the site - {site[0]}"
+            alert = f"Error request the site (server {server_name}) - {site[0]}"
             logging.info(alert)
             # send_from_yandex(to_addr[0:1], alert, alert)
             # send_telegram(alert, chat_id_d)
@@ -46,7 +47,7 @@ def request_list(sites):
             ind_1 = req_txt.find(site[2])
 
             if ind_1 == -1:
-                alert = f"Site {site[0]} has changed! \n {site[1]}"
+                alert = f"Site {site[0]} has changed (server {server_name})! \n {site[1]}"
                 logging.info(alert)
                 send_telegram(alert, chat_id_v)
                 send_telegram(alert, chat_id_d)
@@ -67,10 +68,10 @@ def request_list(sites):
                 # print(text_find)
                 # print(site_txt)
                 if text_find == site_txt:
-                    alert = f"Site {site[0]} is no changed."
+                    alert = f"Site {site[0]} is no changed (server {server_name})."
                     resp.append([site[0], site[1], alert])
                 else:
-                    alert = f"Site {site[0]} has changed! \n {site[1]}"
+                    alert = f"Site {site[0]} has changed (server {server_name})! \n {site[1]}"
                     logging.info(alert)
                     send_telegram(alert, chat_id_v)
                     send_telegram(alert, chat_id_d)
@@ -78,7 +79,7 @@ def request_list(sites):
                     send_telegram(alert, chat_id_g)
                     resp.append([site[0], site[1], alert])
         else:
-            alert = f"False request {req.status_code} at the site - {site[0]}"
+            alert = f"False request {req.status_code} (server {server_name}) at the site - {site[0]}"
             logging.info(alert)
             # send_from_yandex(to_addr[0:1], alert, alert)
             # send_telegram(alert, chat_id_d)
