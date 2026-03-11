@@ -1,4 +1,4 @@
- FROM ubuntu:22.04
+FROM ubuntu:22.04
 #FROM dimasuz/ubuntu2004_python310:v1
 
 MAINTAINER Dimasuz

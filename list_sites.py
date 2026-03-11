@@ -18,10 +18,16 @@ list_sites = [
         "2026 года.",
     ],
     [
-        "mhatschool",
+        "mhatschool_1",
         "https://mhatschool.ru/abiturient/133",
         "Актерский факультет</div>",
-        "2026 года.",
+        "Телефон: +7 (495) 629-09-64.",
+    ],
+[
+        "mhatschool_2",
+        "https://exam.mhatschool.ru",
+        "<h2>Добро пожаловать!</h2>",
+        "Зарегистрироваться</a></div>",
     ],
     [
         "gitis_1",
