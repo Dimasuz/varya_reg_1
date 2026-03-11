@@ -1,3 +1,5 @@
+# [ ["название", "ссылки", "начало блока", "конец блока (блок не входит)", ], [...], ]
+
 list_sites = [
     [
         "vgik_1",
@@ -17,18 +19,18 @@ list_sites = [
         "В 2026-2027 учебном году",
         "2026 года.",
     ],
-    [
-        "mhatschool_1",
-        "https://mhatschool.ru/abiturient/133",
-        "Актерский факультет</div>",
-        "Телефон: +7 (495) 629-09-64.",
-    ],
-[
-        "mhatschool_2",
-        "https://exam.mhatschool.ru",
-        "<h2>Добро пожаловать!</h2>",
-        "Зарегистрироваться</a></div>",
-    ],
+#     [
+#         "mhatschool_1",
+#         "https://mhatschool.ru/abiturient/133",
+#         "Актерский факультет</div>",
+#         "Телефон: +7 (495) 629-09-64.",
+#     ],
+# [
+#         "mhatschool_2",
+#         "https://exam.mhatschool.ru",
+#         "<h2>Добро пожаловать!</h2>",
+#         "Зарегистрироваться</a></div>",
+#     ],
     [
         "gitis_1",
         "https://gitis.net/postupayushim/auditions/",
