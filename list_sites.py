@@ -39,7 +39,7 @@ list_sites = [
     ],
     [
         "gitis_2",
-        "https://gitis.net/postupayushim/bachelor/proslushivania/#muzart",
+        "https://gitis.net/postupayushim/bachelor/proslushivania/#artist",
         "Артист драматического театра и кино",
         "Артист музыкального театра",
     ],
