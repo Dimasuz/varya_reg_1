@@ -4,18 +4,21 @@ from vk_api.longpoll import VkEventType, VkLongPoll
 
 class MessageVk:
 
-    def __init__(self, api_token):
+    def __init__(self, vk_token):
 
-        # Авторизация в VK API
-        self.vk_session = vk_api.VkApi(token=api_token)
-        self.vk = self.vk_session.get_api()
+        if not vk_token:
+            self.vk = False
+        else:
+            # Авторизация в VK API
+            self.vk_session = vk_api.VkApi(token=vk_token)
+            self.vk = self.vk_session.get_api()
+            # Создаём объект для работы с событиями
+            self.longpoll = VkLongPoll(self.vk_session)
 
-        # Создаём объект для работы с событиями
-        self.longpoll = VkLongPoll(self.vk_session)
-
-        # Функция для отправки сообщений
-
+    # Функция для отправки сообщений
     def send_message(self, peer_id, message):
+        if not self.vk:
+            return "VK is turn off."
         try:
             response = self.vk.messages.send(
                 peer_id=peer_id, message=message, random_id=0
@@ -26,6 +29,8 @@ class MessageVk:
             return e
 
     def test(self, vk_id):
+        if not self.vk:
+            return "VK is turn off."
         # Посылаем сообщение пользователю с указанным ID
         self.send_message(vk_id, message="Test1")
 

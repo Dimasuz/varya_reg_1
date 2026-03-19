@@ -1,12 +1,12 @@
 version: '3.10'
 
-networks:
-  backend:
-
-volumes:
-  pgdata:
-  static:
-  media:
+#networks:
+#  backend:
+#
+#volumes:
+#  pgdata:
+#  static:
+#  media:
 
 services:
 
@@ -20,11 +20,11 @@ services:
 #    expose:
 #      - 8000
     ports:
-      - "8000:8000"
+      - "1000:8000"
     volumes:
       - .:/usr/src/app
 
-    networks:
-      backend:
-        aliases:
-          - web
+#    networks:
+#      backend:
+#        aliases:
+#          - web

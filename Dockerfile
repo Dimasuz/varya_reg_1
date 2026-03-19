@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 #FROM dimasuz/ubuntu2004_python310:v1
 
-MAINTAINER Dimasuz
+LABEL description="ubuntu:22.04+python3.10"
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Moscow
@@ -12,8 +12,8 @@ RUN apt update \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 COPY requirements.txt /usr/src/app/requirements.txt
 WORKDIR /usr/src/app
@@ -21,8 +21,8 @@ RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
 COPY . /usr/src/app
 
-ENTRYPOINT bash run.sh
+ENTRYPOINT ["bash", "run.sh"]
 
     # docker image build -t dimasuz/varya:v1 .
 
-    # docker container run -i -t -p 1000:8000 dimasuz/varya:v1
+    # docker container run -d -i -t -p 1000:8000 dimasuz/varya:v1

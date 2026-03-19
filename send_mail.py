@@ -9,6 +9,8 @@ ENV_FILE = find_dotenv()
 if ENV_FILE:
     load_dotenv(ENV_FILE)
 
+mypass = os.environ.get("EMAIL_PASS", "")
+
 to_addr = [
     "5845889@mail.ru",
 ]
@@ -17,8 +19,10 @@ to_addr = [
 
 def send_from_yandex(to_addr, subj, text):
 
+    if not mypass:
+        return "EMAIL is turn off."
+
     from_addr = "daluzanov@yandex.ru"
-    mypass = os.environ.get("EMAIL_PASS", "")
 
     msg = MIMEMultipart()
     msg["From"] = from_addr

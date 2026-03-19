@@ -8,10 +8,13 @@ ENV_FILE = find_dotenv()
 if ENV_FILE:
     load_dotenv(ENV_FILE)
 
-bot_token = os.environ.get("BOT_TOKEN", "")
+bot_token = os.environ.get("TG_BOT_TOKEN", "")
 
+def send_telegram(chat_id, message_text):
 
-def send_telegram(message_text, chat_id):
+    if not bot_token:
+        return "Telegramm is turn off."
+
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
     params = {
         "chat_id": chat_id,
