@@ -55,7 +55,9 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
     start = datetime.now()
     check_day = start.day - 1
     time_work = start + timedelta(minutes=send_time)
-    alert = f"Start the program on server {server_name} at {start}"
+    alert = (
+        f"Start the program on server {server_name} at {start.isoformat(sep=' ')[:16]}"
+    )
     logging.info(alert)
     vk_message = MessageVk(vk_token)
     send_mail = send_from_yandex(to_addr, alert, f"{alert}\nOld logs:\n{log}")
@@ -65,11 +67,22 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
     send_tg = send_telegram(tg_id_d, alert)
     logging.info(send_tg)
 
+    for site in list_sites:
+        file_name = f"fix_{site[0]}.txt"
+        if not os.path.exists(file_name):
+            logging.info(f"{site[0]} does not exist.")
+            request_site(site)
+            logging.info(f"{site[0]} - file was renewed.")
+        else:
+            logging.info(f"{site[0]} - file exist.")
+
     changed_time = 1
 
     while True:
         time_now = datetime.now()
-        logging.info(f"Request the websites on server {server_name} at {time_now}")
+        logging.info(
+            f"Request the websites on server {server_name} at {time_now.time().isoformat()[:5]}"
+        )
         time.sleep(1)
         resp = request_all()
         # pprint(resp)
@@ -91,10 +104,9 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
             else:
                 pass
                 # print(f"{resp[i][0]} has no changed.")
-        time.sleep(per)
 
         if (start + timedelta(days=work_time)) < time_now:
-            alert = f"Stop the program on server {server_name} at {time_now}"
+            alert = f"Stop the program on server {server_name} at {time_now.isoformat(sep=' ')[:16]}"
             logging.info(alert)
             send_mail = send_from_yandex(to_addr, alert, alert)
             logging.info(send_mail)
@@ -118,19 +130,22 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
             send_mail = send_from_yandex(to_addr, alert, log)
             logging.info(send_mail)
             with open("debug_old.log", "a") as f:
-                f.write(f"\n{time_now}\n{log}")
+                f.write(f"\n{time_now.isoformat()[:10]}\n{log}")
             with open("debug.log", "w") as f:
                 f.write(f"{alert}\n")
 
         if time_now > time_work:
-            alert = f"Working on server {server_name}! {time_now}"
+            alert = (
+                f"Working on server {server_name}! {time_now.time().isoformat()[:5]}"
+            )
             logging.info(alert)
             send_telegram(tg_id_g, alert)
             vk_message.send_message(vk_id_d, alert)
             time_work += timedelta(minutes=send_time)
-            log = "Logs was not read!"
-            send_mail = send_from_yandex(to_addr, alert, log)
+            send_mail = send_from_yandex(to_addr, alert, alert)
             logging.info(send_mail)
+
+        time.sleep(per)  # waiting for next request
 
 
 if __name__ == "__main__":

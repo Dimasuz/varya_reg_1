@@ -10,6 +10,7 @@ if ENV_FILE:
 
 bot_token = os.environ.get("TG_BOT_TOKEN", "")
 
+
 def send_telegram(chat_id, message_text):
 
     if not bot_token:

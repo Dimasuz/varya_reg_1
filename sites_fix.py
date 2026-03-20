@@ -20,8 +20,8 @@ def request_site(site):
             ind_2 = req_txt.find(site[3], ind_1)
             if ind_2 == -1:
                 alert = f"Problem with site {site[0]}"
-            else:
-                print(ind_1, ind_2)
+            # else:
+            #     print(ind_1, ind_2)
             text_find = req_txt[ind_1:ind_2]
             # print(text_find)
             with open(f"fix_{site[0]}.txt", "w", encoding="utf-8") as f:
