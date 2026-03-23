@@ -119,7 +119,8 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
 
         if time_now.day > check_day and time_now.hour >= check_time:
             check_day = time_now.day
-            alert = f"Check the websites by yourself (server {server_name})\n{'\n'.join([site[1] for site in list_sites])}"
+            list_s = '\n'.join([site[1] for site in list_sites])
+            alert = f"Check the websites by yourself (server {server_name}):\n{list_s}"
             logging.info(alert)
             send_telegram(tg_id_v, alert)
             send_telegram(tg_id_d, alert)
