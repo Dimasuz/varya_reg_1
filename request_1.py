@@ -1,15 +1,10 @@
 import logging
 import os
-from pprint import pprint
 
 from dotenv import find_dotenv, load_dotenv
 
 from list_sites import list_sites
 from request_site import request_url
-from send_mail import send_from_yandex, to_addr
-
-# from send_tel import send_telegram
-from send_vk import MessageVk
 
 logging.basicConfig(
     level=logging.INFO,
@@ -23,19 +18,11 @@ ENV_FILE = find_dotenv()
 if ENV_FILE:
     load_dotenv(ENV_FILE)
 
-# chat_id_g = os.environ.get("CHAT_ID_G", "")
-# chat_id_v = os.environ.get("CHAT_ID_V", "")
-# chat_id_d = os.environ.get("CHAT_ID_D", "")
-vk_token = os.environ.get("VK_TOKEN", "")
-vk_id_d = os.environ.get("VK_ID_D", "")
-vk_id_v = os.environ.get("VK_ID_V", "")
 server_name = os.environ.get("SERVER_NAME", "?")
 
 
 def request_list(sites):
-
     resp = []
-    vk_message = MessageVk(vk_token)
 
     for site in sites:
         print(site[0])
@@ -43,8 +30,6 @@ def request_list(sites):
         if req == None:
             alert = f"Error request the site (server {server_name}) - {site[0]}"
             logging.info(alert)
-            # send_from_yandex(to_addr[0:1], alert, alert)
-            # send_telegram(alert, chat_id_d)
             resp.append([site[0], site[1], alert])
             continue
 
@@ -54,47 +39,29 @@ def request_list(sites):
 
             if ind_1 == -1:
                 alert = (
-                    f"Site {site[0]} has changed (server {server_name})! \n {site[1]}"
+                    f"Site {site[0]} has changed (server {server_name})!\n{site[1]}"
                 )
-                logging.info(alert)
-                # send_telegram(alert, chat_id_v)
-                # send_telegram(alert, chat_id_d)
-                send_from_yandex(to_addr, alert, alert)
-                # send_telegram(alert, chat_id_g)
-                vk_message.send_message(vk_id_v, alert)
-                vk_message.send_message(vk_id_d, alert)
                 resp.append([site[0], site[1], alert])
             else:
                 ind_2 = req_txt.find(site[3], ind_1)
                 text_find = req_txt[ind_1:ind_2]
                 with open(f"check_{site[0]}.txt", "w", encoding="utf-8") as f:
                     f.write(text_find)
-                    # f.flush()
                 with open(f"check_{site[0]}.txt", encoding="utf-8") as f_check, open(
                     f"fix_{site[0]}.txt", encoding="utf-8"
                 ) as f:
                     text_find = f_check.read()
                     site_txt = f.read()
-                # print(text_find)
-                # print(site_txt)
                 if text_find == site_txt:
                     alert = f"Site {site[0]} is no changed (server {server_name})."
                     resp.append([site[0], site[1], alert])
                 else:
-                    alert = f"Site {site[0]} has changed (server {server_name})! \n {site[1]}"
+                    alert = f"Site {site[0]} has changed (server {server_name})!\n{site[1]}"
                     logging.info(alert)
-                    # send_telegram(alert, chat_id_v)
-                    # send_telegram(alert, chat_id_d)
-                    send_from_yandex(to_addr, alert, alert)
-                    # send_telegram(alert, chat_id_g)
-                    vk_message.send_message(vk_id_v, alert)
-                    vk_message.send_message(vk_id_d, alert)
                     resp.append([site[0], site[1], alert])
         else:
             alert = f"False request {req.status_code} (server {server_name}) at the site - {site[0]}"
             logging.info(alert)
-            # send_from_yandex(to_addr[0:1], alert, alert)
-            # send_telegram(alert, chat_id_d)
             resp.append([site[0], site[1], alert])
 
         print(alert)

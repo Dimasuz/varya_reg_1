@@ -7,11 +7,9 @@ from dotenv import find_dotenv, load_dotenv
 
 from list_sites import list_sites
 from request_1 import request_all
-
 from send_mail import send_from_yandex, to_addr
-from send_vk import MessageVk
-
 from send_tel import send_telegram
+from send_vk import MessageVk
 from sites_fix import request_site
 
 # from pprint import pprint
@@ -35,7 +33,7 @@ send_time_min = int(
 work_time_days = int(os.environ.get("WORK_TIME", "30"))
 check_time = int(
     os.environ.get("CHECK_TIME", "12")
-)  # час когдау прислать напоминание о проверке и логи
+)  # час когда прислать напоминание о проверке и логи
 tg_id_g = os.environ.get("TG_ID_G", "")
 tg_id_v = os.environ.get("TG_ID_V", "")
 tg_id_d = os.environ.get("TG_ID_D", "")
@@ -88,10 +86,15 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
         # pprint(resp)
         for i in range(len(resp)):
             if "has changed" in resp[i][2]:
-                alert = (
-                    f"{resp[i][0]} has changed (server {server_name}), {changed_time=}."
-                )
+                alert = f"{resp[i][2]}\n{changed_time=}."
                 logging.info(alert)
+                vk_message.send_message(vk_id_v, alert)
+                vk_message.send_message(vk_id_d, alert)
+                send_from_yandex(to_addr, alert, alert)
+                send_telegram(alert, tg_id_v)
+                send_telegram(alert, tg_id_d)
+                send_telegram(alert, tg_id_g)
+
                 if changed_time > 2:
                     request_site(list_sites[i])
                     alert = f"{resp[i][0]} has renewed (server {server_name})."
@@ -116,7 +119,7 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
 
         if time_now.day > check_day and time_now.hour >= check_time:
             check_day = time_now.day
-            alert = f"Check the websites by yourself (server {server_name})\n{list_sites[0][1]}\n{list_sites[2][1]}\n{list_sites[3][1]}\n{list_sites[4][1]}"
+            alert = f"Check the websites by yourself (server {server_name})\n{'\n'.join([site[1] for site in list_sites])}"
             logging.info(alert)
             send_telegram(tg_id_v, alert)
             send_telegram(tg_id_d, alert)
@@ -136,7 +139,7 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
 
         if time_now > time_work:
             alert = (
-                f"Working on server {server_name}! {time_now.time().isoformat()[:5]}"
+                f"Working on server {server_name} at {time_now.time().isoformat()[:5]}"
             )
             logging.info(alert)
             send_telegram(tg_id_g, alert)
