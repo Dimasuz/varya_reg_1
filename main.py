@@ -87,10 +87,11 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
         for i in range(len(resp)):
             if "has changed" in resp[i][2]:
                 alert = f"{resp[i][2]}\n{changed_time=}."
+                subj_alert = f"Site {resp[i][0]} has changed (server {server_name}, {changed_time=})!"
                 logging.info(alert)
                 vk_message.send_message(vk_id_v, alert)
                 vk_message.send_message(vk_id_d, alert)
-                send_from_yandex(to_addr, alert, alert)
+                send_from_yandex(to_addr, subj_alert, alert)
                 send_telegram(alert, tg_id_v)
                 send_telegram(alert, tg_id_d)
                 send_telegram(alert, tg_id_g)
