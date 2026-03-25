@@ -26,7 +26,9 @@ def request_list(sites):
 
     for site in sites:
         print(site[0])
+
         req = request_url(site[1])
+
         if req == None:
             alert = f"Error request the site (server {server_name}) - {site[0]}"
             logging.info(alert)
@@ -39,7 +41,7 @@ def request_list(sites):
 
             if ind_1 == -1:
                 alert = (
-                    f"Site {site[0]} has changed (server {server_name})!\n{site[1]}"
+                    f"Not find the begin of text on {site[0]} (server {server_name})!\n{site[1]}"
                 )
                 resp.append([site[0], site[1], alert])
             else:

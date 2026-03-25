@@ -15,9 +15,9 @@ list_sites = [
     ],
     [
         "shepkinskoe",
-        "https://shepkinskoe.ru/applicants/specialty/priem-2026/",
-        "В 2026-2027 учебном году",
-        "записаться заново!",
+        "https://shepkinskoe.ru/applicants/specialty/priem-2026-goda/",
+        "Уважаемые абитуриенты",
+        "за понимание!",
     ],
     #     [
     #         "mhatschool_1",
@@ -43,10 +43,10 @@ list_sites = [
         "Артист драматического театра и кино",
         "Артист музыкального театра",
     ],
-    [
-        "raikin",
-        "https://www.raikin-school.com/priem_2026.php",
-        "в мае",
-        "определены в апреле",
-    ],
+    # [
+    #     "raikin",
+    #     "https://www.raikin-school.com/priem_2026.php",
+    #     "в мае",
+    #     "определены в апреле",
+    # ],
 ]

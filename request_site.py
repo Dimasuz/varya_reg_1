@@ -17,10 +17,12 @@ def request_url(url):
     except requests.exceptions.Timeout:
         alert = f"Timed out on {url}"
         logging.info(alert)
-        return None
+        return None, alert
     except Exception as ex:
         alert = f"Error: {ex}"
         logging.info(alert)
-        return None
+        return None, alert
+    else:
+        alert = f"{req.status_code} Response code for {url}"
 
-    return req
+    return req, alert
