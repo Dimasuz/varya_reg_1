@@ -45,7 +45,9 @@ def request_list(sites):
                 print(alert)
 
         else:
-            alert = f"{site[0]} - Error request the site (server {server_name})!/n{req[1]}"
+            alert = (
+                f"{site[0]} - Error request the site (server {server_name})!/n{req[1]}"
+            )
             logging.info(alert)
             resp.append([site[0], site[1], alert])
 

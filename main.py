@@ -12,7 +12,6 @@ from send_tel import send_telegram
 from send_vk import MessageVk
 from sites_fix import request_site
 
-
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
@@ -121,7 +120,7 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
 
         if time_now.day > check_day and time_now.hour >= check_time:
             check_day = time_now.day
-            list_s = '\n'.join([site[1] for site in list_sites])
+            list_s = "\n".join([site[1] for site in list_sites])
             alert = f"Check the websites by yourself (server {server_name}):\n{list_s}"
             logging.info(alert)
             send_telegram(tg_id_v, alert)
@@ -141,12 +140,10 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
                 f.write(f"{alert}\n")
 
         if time_now > time_work:
-            alert = (
-                f"Working on server {server_name} at {time_now.time().isoformat()[:5]}              "
-            )
+            alert = f"Working on server {server_name} at {time_now.time().isoformat()[:5]}              "
             logging.info(alert)
             if add_alert:
-                alert += '\n'.join(add_alert)
+                alert += "\n".join(add_alert)
             send_telegram(tg_id_g, alert)
             vk_message.send_message(vk_id_d, alert)
             time_work += timedelta(minutes=send_time)

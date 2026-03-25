@@ -4,14 +4,14 @@ from list_sites import list_sites
 from request_site import request_url
 
 
-def request_site(site, file_name='fix'):
+def request_site(site, file_name="fix"):
 
     req = request_url(site[1])
 
     if req[0] == None:
-       alert = f"500 {site[0]} - Request was wrong! {req[1]}"
-       text_find = alert
-       for_return = None
+        alert = f"500 {site[0]} - Request was wrong! {req[1]}"
+        text_find = alert
+        for_return = None
 
     elif req[0].status_code == 200:
         req_txt = req[0].text

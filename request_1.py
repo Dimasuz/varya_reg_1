@@ -40,9 +40,7 @@ def request_list(sites):
             ind_1 = req_txt.find(site[2])
 
             if ind_1 == -1:
-                alert = (
-                    f"Not find the begin of text on {site[0]} (server {server_name})!\n{site[1]}"
-                )
+                alert = f"Not find the begin of text on {site[0]} (server {server_name})!\n{site[1]}"
                 resp.append([site[0], site[1], alert])
             else:
                 ind_2 = req_txt.find(site[3], ind_1)
@@ -58,7 +56,9 @@ def request_list(sites):
                     alert = f"Site {site[0]} is no changed (server {server_name})."
                     resp.append([site[0], site[1], alert])
                 else:
-                    alert = f"Site {site[0]} has changed (server {server_name})!\n{site[1]}"
+                    alert = (
+                        f"Site {site[0]} has changed (server {server_name})!\n{site[1]}"
+                    )
                     logging.info(alert)
                     resp.append([site[0], site[1], alert])
         else:
