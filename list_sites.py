@@ -17,7 +17,7 @@ list_sites = [
         "shepkinskoe",
         "https://shepkinskoe.ru/applicants/specialty/priem-2026-goda/",
         "Уважаемые абитуриенты",
-        "за понимание!",
+        "Не переходите по ссылкам с других ресурсов и информационных каналов.",
     ],
     #     [
     #         "mhatschool_1",
@@ -39,9 +39,9 @@ list_sites = [
     ],
     [
         "gitis_2",
-        "https://gitis.net/postupayushim/bachelor/proslushivania/#artist",
-        "Артист драматического театра и кино",
-        "Артист музыкального театра",
+        "https://admission.gitis.net/232",
+        " ",
+        " ",
     ],
     # [
     #     "raikin",

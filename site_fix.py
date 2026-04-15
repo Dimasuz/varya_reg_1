@@ -1,13 +1,13 @@
 from request_site import request_url
 
-url = "https://vgik.info/abiturient/higher/spetsialitet/aktyerskiy-fakultet/"
+url = "https://admission.gitis.net/"
 
 
 def request_site(url=url):
     req = request_url(url)
 
-    if req.status_code == 200:
-        req_txt = req.text
+    if req[0].status_code == 200:
+        req_txt = req[0].text
         with open(f"{url[8:15]}_fix.txt", "w+", encoding="utf-8") as f:
             f.write(req_txt)
         alert = f"Request for site {url[8:14]} is OK."
