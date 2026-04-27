@@ -17,7 +17,7 @@ list_sites = [
         "shepkinskoe",
         "https://shepkinskoe.ru/applicants/specialty/priem-2026-goda/",
         "Уважаемые абитуриенты",
-        "Не переходите по ссылкам с других ресурсов и информационных каналов.",
+        "очном формате.",
     ],
     #     [
     #         "mhatschool_1",
