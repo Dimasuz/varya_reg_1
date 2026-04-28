@@ -14,10 +14,16 @@ list_sites = [
         "</tbody>",
     ],
     [
-        "shepkinskoe",
+        "shepka_1",
         "https://shepkinskoe.ru/applicants/specialty/priem-2026-goda/",
         "Уважаемые абитуриенты",
         "очном формате.",
+    ],
+    [
+        "shepka_2",
+        "https://shepkinskoe.ru/applicants/specialty/priem-2026-goda/tvorcheskie-proslushivaniya/",
+        "В 2026 году Училище проводит набор на два первых курса",
+        "заполненностью даты.",
     ],
     #     [
     #         "mhatschool_1",

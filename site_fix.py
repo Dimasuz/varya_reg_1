@@ -1,6 +1,6 @@
 from request_site import request_url
 
-url = "https://admission.gitis.net/"
+url = "https://shepkinskoe.ru/applicants/specialty/priem-2026-goda/tvorcheskie-proslushivaniya/"
 
 
 def request_site(url=url):
