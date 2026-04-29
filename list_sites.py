@@ -25,6 +25,12 @@ list_sites = [
         "В 2026 году Училище проводит набор на два первых курса",
         "заполненностью даты.",
     ],
+    [
+        "shepka_3",
+        "https://shepkinskoe.ru/applicants/specialty/priem-2026-goda/otborochnye-proslushivaniya/",
+        "Уважаемые абитуриенты",
+        "Не переходите по ссылкам с других ресурсов и информационных каналов.",
+    ],
     #     [
     #         "mhatschool_1",
     #         "https://mhatschool.ru/abiturient/133",
