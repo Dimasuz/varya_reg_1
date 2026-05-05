@@ -1,36 +1,36 @@
 # [ ["название", "ссылка", "начало блока (входит в блок)", "конец блока (не входит в блок)", ], [...], ]
 
 list_sites = [
-    [
-        "vgik_1",
-        "https://vgik.info/abiturient/higher/spetsialitet/aktyerskiy-fakultet/",
-        '<div class="iner-page-title">Актёрский факультет</div>',
-        "Расписание предварительных прослушиваний",
-    ],
-    [
-        "vgik_2",
-        "https://vgik.info/abiturient/higher/spetsialitet/aktyerskiy-fakultet/",
-        "Расписание предварительных прослушиваний",
-        "</tbody>",
-    ],
-    [
-        "shepka_1",
-        "https://shepkinskoe.ru/applicants/specialty/priem-2026-goda/",
-        "Уважаемые абитуриенты",
-        "очном формате.",
-    ],
-    [
-        "shepka_2",
-        "https://shepkinskoe.ru/applicants/specialty/priem-2026-goda/tvorcheskie-proslushivaniya/",
-        "В 2026 году Училище проводит набор на два первых курса",
-        "заполненностью даты.",
-    ],
-    [
-        "shepka_3",
-        "https://shepkinskoe.ru/applicants/specialty/priem-2026-goda/otborochnye-proslushivaniya/",
-        "Уважаемые абитуриенты",
-        "Не переходите по ссылкам с других ресурсов и информационных каналов.",
-    ],
+    # [
+    #     "vgik_1",
+    #     "https://vgik.info/abiturient/higher/spetsialitet/aktyerskiy-fakultet/",
+    #     '<div class="iner-page-title">Актёрский факультет</div>',
+    #     "Расписание предварительных прослушиваний",
+    # ],
+    # [
+    #     "vgik_2",
+    #     "https://vgik.info/abiturient/higher/spetsialitet/aktyerskiy-fakultet/",
+    #     "Расписание предварительных прослушиваний",
+    #     "</tbody>",
+    # ],
+    # [
+    #     "shepka_1",
+    #     "https://shepkinskoe.ru/applicants/specialty/priem-2026-goda/",
+    #     "Уважаемые абитуриенты",
+    #     "очном формате.",
+    # ],
+    # [
+    #     "shepka_2",
+    #     "https://shepkinskoe.ru/applicants/specialty/priem-2026-goda/tvorcheskie-proslushivaniya/",
+    #     "В 2026 году Училище проводит набор на два первых курса",
+    #     "заполненностью даты.",
+    # ],
+    # [
+    #     "shepka_3",
+    #     "https://shepkinskoe.ru/applicants/specialty/priem-2026-goda/otborochnye-proslushivaniya/",
+    #     "Уважаемые абитуриенты",
+    #     "Не переходите по ссылкам с других ресурсов и информационных каналов.",
+    # ],
     #     [
     #         "mhatschool_1",
     #         "https://mhatschool.ru/abiturient/133",
