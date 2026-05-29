@@ -16,12 +16,12 @@ class MessageVk:
             self.longpoll = VkLongPoll(self.vk_session)
 
     # Функция для отправки сообщений
-    def send_message(self, peer_id, message):
+    def send_message(self, vk_id, message):
         if not self.vk:
             return "VK is turn off."
         try:
             response = self.vk.messages.send(
-                peer_id=peer_id, message=message, random_id=0
+                peer_id=vk_id, message=message, random_id=0
             )
             return response
         except Exception as e:

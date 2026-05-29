@@ -55,7 +55,7 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
     )
     logging.info(alert)
     vk_message = MessageVk(vk_token)
-    send_mail = send_from_yandex(to_addr, alert, f"{alert}\nOld logs:\n{log}")
+    send_mail = send_from_yandex([to_addr[0]], alert, f"{alert}\nOld logs:\n{log}")
     logging.info(send_mail)
     send_vk = vk_message.send_message(vk_id_d, alert)
     logging.info(send_vk)
@@ -89,13 +89,16 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
             if "has changed" in resp[i][2]:
                 alert = f"{resp[i][2]}\n{changed_time=}."
                 subj_alert = f"{resp[i][0]} Site has changed (server {server_name}, {changed_time=})!"
-                logging.info(alert)
+                if changed_time == 3:
+                    alert += f"\n{resp[i][3]}"
+                    send_from_yandex(to_addr, subj_alert, alert, f"diff_{resp[i][0]}.html")
                 vk_message.send_message(vk_id_v, alert)
                 vk_message.send_message(vk_id_d, alert)
-                send_from_yandex(to_addr, subj_alert, alert)
+                send_from_yandex([to_addr[0]], subj_alert, alert)
                 send_telegram(alert, tg_id_v)
                 send_telegram(alert, tg_id_d)
                 send_telegram(alert, tg_id_g)
+                logging.info(alert)
 
                 if changed_time > 2:
                     request_site(list_sites[i])
@@ -112,7 +115,7 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
         if (start + timedelta(days=work_time)) < time_now:
             alert = f"Stop the program on server {server_name} at {time_now.isoformat(sep=' ')[:16]}"
             logging.info(alert)
-            send_mail = send_from_yandex(to_addr, alert, alert)
+            send_mail = send_from_yandex([to_addr[0]], alert, alert)
             logging.info(send_mail)
             send_telegram(tg_id_g, alert)
             vk_message.send_message(vk_id_d, alert)
@@ -132,7 +135,7 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
             alert = f"Logs for {time_now.isoformat()[:10]}"
             with open("debug.log") as f:
                 log = f.read()
-            send_mail = send_from_yandex(to_addr, alert, log)
+            send_mail = send_from_yandex([to_addr[0]], alert, log)
             logging.info(send_mail)
             with open("debug_old.log", "a") as f:
                 f.write(f"\n{time_now.isoformat()[:10]}\n{log}")
@@ -147,7 +150,7 @@ def check_sites(per=period_sec, send_time=send_time_min, work_time=work_time_day
             send_telegram(tg_id_g, alert)
             vk_message.send_message(vk_id_d, alert)
             time_work += timedelta(minutes=send_time)
-            send_mail = send_from_yandex(to_addr, alert[:40], alert)
+            send_mail = send_from_yandex([to_addr[0]], alert[:40], alert)
             logging.info(send_mail)
 
         time.sleep(per)  # waiting for next request
